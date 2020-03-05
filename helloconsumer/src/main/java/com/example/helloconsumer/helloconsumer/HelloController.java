@@ -3,21 +3,21 @@ package com.example.helloconsumer.helloconsumer;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
- * Created by 张齐 on 2020/2/20 17:36
+ * Created by 张齐 on 2020/3/5 9:50
  */
 @RestController
-public class Hello {
+public class HelloController {
+
     @Autowired
-    private RestTemplate restTemplate;
+    private  HelloService helloService;
 
-    @RequestMapping("/ribbonhello")
-    public String helloconsumer(){
+    @RequestMapping(value = "/ribbon-consumer",method = RequestMethod.GET)
+    public  String hello(){
 
-        return  restTemplate.getForEntity("http://HELLO-SERVICE/nihao",String.class).getBody();
+        return helloService.helloconsumer();
     }
-
 }
